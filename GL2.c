@@ -185,4 +185,6 @@ int main(int argc, char* argv[])
 	glutKeyboardFunc(normalKeys);
 	
 	glutMainLoop();
+
+	int s;
 }
