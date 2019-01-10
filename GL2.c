@@ -9,8 +9,6 @@
 #define DEPTH 400  //глубина
 
 
-
-
 int a = 90; 		 	//угол поворота
 double z_begin = -200;	//начало камеры z
 double x_begin = 100;	//начало камеры x
@@ -176,7 +174,6 @@ void drawing_cursor(void)
 		glVertex2f(5.2, 5);   
 	glEnd();  
 }
-
 
 
 void scene(void)
