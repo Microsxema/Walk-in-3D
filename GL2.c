@@ -52,8 +52,34 @@ void reshpe(int x, int y)
 }
 
 
+void drawAim(void)
+{
+	glMatrixMode(GL_PROJECTION); 
+	glLoadIdentity(); 
+	glOrtho(0, 10, 10, 0, -1, 1); 
+
+	glMatrixMode(GL_MODELVIEW); 
+	glLoadIdentity(); 
+	
+	glBegin(GL_LINES);
+		glColor3f(1, 1, 1); 
+		glVertex2f(5, 4.8); 
+		glVertex2f(5, 5.2);   
+	glEnd();
+	//
+	glBegin(GL_LINES);
+		glColor3f(1, 1, 1); 
+		glVertex2f(4.8, 5); 
+		glVertex2f(5.2, 5);   
+	glEnd();  
+}
+
+
+
 void pl(void)
 {	
+	reshpe(400, 400);
+
 	glLoadIdentity();
 	
 	gluLookAt(x_step, -250,  z_step,
@@ -62,6 +88,7 @@ void pl(void)
 	);
 	
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	
 	
 	//ось y
 	glBegin(GL_LINES);
@@ -168,6 +195,9 @@ void pl(void)
 	  glVertex3f(-70, -250,  400);
 	glEnd();
 	
+	
+	drawAim();
+	
 	glutSwapBuffers();
 }
 
@@ -181,7 +211,7 @@ int main(int argc, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 
 	glutDisplayFunc(pl);
-	glutReshapeFunc(reshpe);
+	//glutReshapeFunc(reshpe);
 	glutKeyboardFunc(normalKeys);
 	
 	glutMainLoop();
