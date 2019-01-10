@@ -205,8 +205,8 @@ int main(int argc, char* argv[])
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(WIDTH, HEIGHT);
-	glEnable(GL_DEPTH_TEST);
 	glutCreateWindow("Walk in 3D");
+	glEnable(GL_DEPTH_TEST);
 
 	glutDisplayFunc(scene);
 	glutKeyboardFunc(keyboard_handling);
