@@ -9,6 +9,7 @@
 #define DEPTH 400  //глубина
 
 
+int aY = 0; 		 	//угол поворота по y
 int a = 90; 		 	//угол поворота по x z
 double y_begin = -250;	//начало камеры y
 double z_begin = -200;	//начало камеры z
