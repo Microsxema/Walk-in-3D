@@ -9,12 +9,14 @@
 #define DEPTH 400  //глубина
 
 
+int aY = 0;			    //угол поворота y
 int a = 90; 		 	//угол поворота
+double y_begin = -250;	//начало камеры y
 double z_begin = -200;	//начало камеры z
 double x_begin = 100;	//начало камеры x
 double z_turn = 1;		//поворот камеры z
 double x_turn = 0;		//поворот камеры z
-
+double y_turn = 0;		//поворот камеры y
 
 
 
@@ -118,9 +120,19 @@ void drawing3D()
 
 void keyboard_handling(unsigned char key, int x, int y)
 {
-	if(key == 'a') a += 3;	
+	if(key == 'a')
+	{ 
+		a += 3;
+		z_turn = sin(a * M_PI / 180);
+		x_turn = cos(a * M_PI / 180);	
+	}
 	
-	else if(key == 'd') a -= 3;
+	else if(key == 'd') 
+	{
+		a -= 3;
+		z_turn = sin(a * M_PI / 180);
+		x_turn = cos(a * M_PI / 180);
+	}
 	
 	else if(key == 'w')
 	{
@@ -133,11 +145,39 @@ void keyboard_handling(unsigned char key, int x, int y)
 		z_begin -= z_turn * 5; 
 		x_begin += x_turn * 5;
 	}
-		
 	
-	z_turn = sin(a * M_PI / 180);
-	x_turn = cos(a * M_PI / 180);
-
+	else if(key == 'r')
+	{
+		aY += 3;
+		y_turn = sin(aY * M_PI / 180);
+		//z_turn = cos(aY * M_PI / 180);
+		
+		if(y_turn == sin(90 * M_PI / 180))
+		{	
+			aY -= 3;
+			y_turn = sin(87 * M_PI / 180);
+		}
+	}
+	
+	else if(key == 'f')
+	{
+		aY -= 3;
+		y_turn = sin(aY * M_PI / 180);
+		//z_turn = cos(aY * M_PI / 180);
+		
+		if(y_turn == sin(-90 * M_PI / 180))
+		{	
+			aY += 3;
+			y_turn = sin(-87 * M_PI / 180);
+		}
+		
+	}
+	
+	
+	printf("aY = %d\n", aY);
+	printf("a = %d\n", a);
+	printf("y = %f\n", y_turn);
+	printf("z = %f\n", z_turn);
 	glutPostRedisplay();
 }
 
@@ -182,8 +222,8 @@ void scene(void)
 
 	glLoadIdentity();
 	
-	gluLookAt(x_begin, 			-250,  z_begin,
-			  x_begin - x_turn, -250,  z_begin + z_turn,
+	gluLookAt(x_begin, 			-250, 		   z_begin,
+			  x_begin - x_turn, -250 + y_turn, z_begin + z_turn,
 			  0, 1, 0
 	);
 	
