@@ -19,9 +19,14 @@ double x_turn = 0;		//поворот камеры z
 double y_turn = 0;		//поворот камеры y
 
 
-
+//
+//Функция отрисовки всех объектов на сцене
+//
 void drawing3D()
 {
+	//
+	//Начало построение осей координат
+	//
 	//ось y
 	glBegin(GL_LINES);
 		glColor3f(0.4, 0.1, 0.8);
@@ -40,9 +45,14 @@ void drawing3D()
 		glVertex3f(0, 0,  400);
 		glVertex3f(0, 0, -400);
 	glEnd();
-	
-	
-	//плоскость пол
+	//
+	//Конец построениеосей координат
+	//
+
+
+	//
+	//Начало построение плоскости пола
+	//
 	glBegin(GL_POLYGON);
 	  glColor3f(0.9, 1.0, 1.0);
 	  glVertex3f( 200, -300,  200);
@@ -58,7 +68,7 @@ void drawing3D()
 	  glVertex3f(-200, -350, -200);
 	  glVertex3f(-200, -300, -200);
 	glEnd();
-	//
+	//бока пола
 	glBegin(GL_POLYGON);
 	  glColor3f(0.4, 0.5, 1.0);
 	  glVertex3f(-200, -350, -200);
@@ -66,7 +76,7 @@ void drawing3D()
 	  glVertex3f(-200, -300,  200);
 	  glVertex3f(-200, -350,  200);
 	glEnd();
-	//
+	//бока пола
 	glBegin(GL_POLYGON);
 	  glColor3f(0.3, 0.1, 1.0);
 	  glVertex3f(-200, -300,  200);
@@ -74,7 +84,7 @@ void drawing3D()
 	  glVertex3f( 200, -350,  200);
 	  glVertex3f( 200, -300,  200);
 	glEnd();
-	//
+	//бока пола
 	glBegin(GL_POLYGON);
 	  glColor3f(0.3, 0.1, 0.4);
 	  glVertex3f( 200, -350,  200);
@@ -82,9 +92,14 @@ void drawing3D()
 	  glVertex3f( 200, -300, -200);
 	  glVertex3f( 200, -350, -200);
 	glEnd();
-	
-	
-	//сыр
+	//
+	//Конец построение плоскости пола
+	//
+
+
+	//
+	//начало построение сыраы
+	//
 	glBegin(GL_POLYGON);
 	  glColor3f(1.0, 0.0, 1.0);
 	  glVertex3f( 80, -250, -80);
@@ -115,9 +130,15 @@ void drawing3D()
 	  glVertex3f( 80, -250, -80);
 	  glVertex3f(-80, -250, -80);
 	glEnd();
+	//
+	//Конец построение сыра
+	//
 }
 
 
+//
+//Функция управление
+//
 void keyboard_handling(unsigned char key, int x, int y)
 {
 	if(key == 'a')
@@ -145,7 +166,11 @@ void keyboard_handling(unsigned char key, int x, int y)
 		z_begin -= z_turn * 5; 
 		x_begin += x_turn * 5;
 	}
-	
+
+	//
+	//Для поворота вверх вниз, использовать
+	//квартилионы (доделать)
+	/*
 	else if(key == 'r')
 	{
 		aY += 3;
@@ -169,12 +194,15 @@ void keyboard_handling(unsigned char key, int x, int y)
 			y_turn = sin(-87 * M_PI / 180);
 		}	
 	}
-	
+	*/
 
 	glutPostRedisplay();
 }
 
 
+//
+//Функция отвечающая за перспективу
+//
 void perspective(int w, int h)
 {	
 	glViewport(0, 0, w, h);
@@ -186,6 +214,9 @@ void perspective(int w, int h)
 }
 
 
+//
+//Функция курсора, накладывает слой поверх
+//
 void drawing_cursor(void)
 {
 	glMatrixMode(GL_PROJECTION); 
@@ -195,6 +226,9 @@ void drawing_cursor(void)
 	glMatrixMode(GL_MODELVIEW); 
 	glLoadIdentity(); 
 	
+	//
+	//Начало отрисовки курсора
+	//
 	glBegin(GL_LINES);
 		glColor3f(1, 1, 1); 
 		glVertex2f(5, 4.8); 
@@ -205,16 +239,27 @@ void drawing_cursor(void)
 		glColor3f(1, 1, 1); 
 		glVertex2f(4.8, 5); 
 		glVertex2f(5.2, 5);   
-	glEnd();  
+	glEnd();
+	//
+	//Конец отрисовки курсора
+	//  
 }
 
 
+//
+//Сцена, все отрисованые объекты
+//расположены тут 
+//
 void scene(void)
 {	
 	perspective(WIDTH, HEIGHT);
 
 	glLoadIdentity();
 	
+	//
+	//Камера, переменные постоянно обновляются
+	//когда мы передвинули камеру
+	//
 	gluLookAt(x_begin, 			y_begin, 		   z_begin,
 			  x_begin - x_turn, y_begin + y_turn, z_begin + z_turn,
 			  0, 1, 0
