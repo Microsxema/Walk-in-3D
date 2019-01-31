@@ -9,14 +9,14 @@
 #define DEPTH 400  //глубина
 
 
-int aY = 0; 		 	//угол поворота по y
-int a = 90; 		 	//угол поворота по x z
-double y_begin = -250;	//начало камеры y
-double z_begin = -200;	//начало камеры z
-double x_begin = 100;	//начало камеры x
-double z_turn = 1;		//поворот камеры z
-double x_turn = 0;		//поворот камеры z
-double y_turn = 0;		//поворот камеры y
+int aY = 0;             //угол поворота по y
+int a = 90;             //угол поворота по x z
+double y_begin = -250;  //начало камеры y
+double z_begin = -200;  //начало камеры z
+double x_begin = 100;   //начало камеры x
+double z_turn = 1;      //поворот камеры z
+double x_turn = 0;      //поворот камеры z
+double y_turn = 0;      //поворот камеры y
 
 
 //
@@ -260,7 +260,7 @@ void scene(void)
 	//Камера, переменные постоянно обновляются
 	//когда мы передвинули камеру
 	//
-	gluLookAt(x_begin, 			y_begin, 		   z_begin,
+	gluLookAt(x_begin, 		y_begin, 		   z_begin,
 			  x_begin - x_turn, y_begin + y_turn, z_begin + z_turn,
 			  0, 1, 0
 	);
